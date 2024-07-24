@@ -2,7 +2,7 @@
 
 Cred ca exista 2 moduri de rezolvare a problemei.
 
-1. Prima varianta de rezolvarea presupune:
+### Prima varianta de rezolvarea presupune:
      1. Parcurgerea listei de taskuri si mutarea intr-o noua lista (a taskurilor ordonate) a acelora care nu au dependinte. 
      2. Daca toate taskurile au dependinte atunci inseamna ca taskurile nu por fi ordonate (avem de-a face ori cu dependinte ciclice or cu dependinte care nu se afla in lista de taskuri).
      3. Se repeta pasul de mai sus pentru taskurile ramase in lista (vor fi mutate taskurile ale caror dependinte au fost deja rezolvate anterior).
@@ -12,15 +12,15 @@ Cred ca exista 2 moduri de rezolvare a problemei.
 
    Avantajul acestui algoritm este ca este usor de inteles (intr-un limbaj procedural nici nu este nevoie de recursivitate, un simplu loop e de ajuns) si de implementat.
 
-2. A doua varianta presupune:
-     1. Inceperem cu primul nod, si rezolvam in mod recursiv dependintel2 sale. 
+### A doua varianta presupune:
+     1. Inceperem cu primul nod, si rezolvam in mod recursiv a dependintelor sale. 
      2. Pasul se repeta pentru toate taskurile din lista. 
      
-   Din nou, imaginandu-ne taskurile sub forma unui arbore (intr-un mod simplificat), alogoritmul ar presupune traversarea arborelui in postordine. Libraria 'digraph_utils', parte a librariei standar in erlang, implementeaza acest algoritm.
+   Din nou, imaginandu-ne taskurile sub forma unui arbore (intr-un mod simplificat), alogoritmul ar presupune traversarea arborelui in postordine. Libraria 'digraph_utils', parte a librariei standard in erlang, implementeaza acest algoritm.
    
-   Un eventual avantaj al acestui algoritm este acela ca inceraca sa pastreza pe cat posibil ordinea initiala a taskurile (bineinteles depinde de implemetarea specifica).
+   Un eventual avantaj al acestui algoritm este acela ca incearca sa pastreze pe cat posibil ordinea initiala a taskurile (bineinteles depinde de implemetarea specifica).
 
-Dat fiind faptul ca problema nu cere pastrarea pe cat posibil a ordinii initiale a taskurilor, cat si datorita modului succint in care se poate implementa in erlang, si faptul ca varianta 2 e deja implemtata ca librarie standard, eu am ales sa implementez varianta 1.
+Dat fiind faptul ca problema nu cere pastrarea pe cat posibil a ordinii initiale a taskurilor, modului succint in care se poate implementa in erlang, si faptul ca varianta 2 e deja implemtata in libraria standard, eu am ales sa implementez varianta 1.
 
 
 ## Fisiere de interes
