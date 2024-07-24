@@ -1,6 +1,6 @@
 ## Cateva cuvinte despre alogoritmul folosit.
 
-Cred ca exista 2 moduri de rezolvare a problemei.
+Problema se poate aborda in 2 moduri.
 
 ### Prima varianta de rezolvarea presupune:
 
