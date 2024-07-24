@@ -6,10 +6,11 @@ Cred ca exista 2 moduri de rezolvare a problemei.
 
      1. Parcurgerea listei de taskuri si mutarea intr-o noua lista (a taskurilor ordonate) 
         a acelora care nu au dependinte. 
-     2. Daca toate taskurile au dependinte atunci inseamna ca taskurile nu por fi ordonate (avem 
-        de-a face ori cu dependinte ciclice or cu dependinte care nu se afla in lista de taskuri).
-     3. Se repeta pasul de mai sus pentru taskurile ramase in lista (vor fi mutate taskurile ale 
-        caror dependinte au fost deja rezolvate anterior).
+     2. Daca toate taskurile au dependinte atunci inseamna ca taskurile nu por fi ordonate 
+        (avem de-a face ori cu dependinte ciclice or cu dependinte care nu se afla in lista 
+        de taskuri).
+     3. Se repeta pasul de mai sus pentru taskurile ramase in lista (vor fi mutate taskurile
+        ale caror dependinte au fost deja rezolvate anterior).
      4. Algoritmul se repeta paca cand nu mai este nici un task de mutat.
 
    Pentru a vizualiza algoritmul, ne putem imagina taskurile (intr-un mod simplificat, pentru ca problema e cu graf, nu un arbore, dar arborii sunt usor de vizualizat) sub forma unui arbore in care nodurile copil sunt dependinte. Algorimtul ar presupune parcurgerea mai intai a nodurilor frunza, indreptandu-ne cate un nivel catre nodurile radacina. 
