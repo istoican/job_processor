@@ -13,7 +13,7 @@ Cred ca exista 2 moduri de rezolvare a problemei.
         ale caror dependinte au fost deja rezolvate anterior).
      4. Algoritmul se repeta paca cand nu mai este nici un task de mutat.
 
-   Pentru a vizualiza algoritmul, ne putem imagina taskurile (intr-un mod simplificat, pentru ca problema e cu graf, nu un arbore, dar arborii sunt usor de vizualizat) sub forma unui arbore in care nodurile copil sunt dependinte. Algorimtul ar presupune parcurgerea mai intai a nodurilor frunza, indreptandu-ne cate un nivel catre nodurile radacina. 
+   Pentru a vizualiza algoritmul, ne putem imagina taskurile (intr-un mod simplificat, pentru ca problema e cu graf, nu un arbore, si nici nu poate avea un singur nod radacina, dar arborii sunt mai usor de vizualizat) sub forma unui arbore in care nodurile copil sunt dependinte. Algorimtul ar presupune parcurgerea mai intai a tuturor nodurilor frunza, indreptandu-ne nivel cu nivel catre nodurile radacina. 
 
    Avantajul acestui algoritm este ca este usor de inteles (intr-un limbaj procedural nici nu este nevoie de recursivitate, un simplu loop e de ajuns) si de implementat.
 
@@ -22,7 +22,7 @@ Cred ca exista 2 moduri de rezolvare a problemei.
      1. Inceperem cu primul nod, si rezolvam in mod recursiv a dependintelor sale. 
      2. Pasul se repeta pentru toate taskurile din lista. 
      
-   Din nou, imaginandu-ne taskurile sub forma unui arbore (intr-un mod simplificat), alogoritmul ar presupune traversarea arborelui in postordine. Libraria 'digraph_utils', parte a librariei standard in erlang, implementeaza acest algoritm.
+   Din nou, imaginandu-ne taskurile sub forma unui arbore (intr-un mod simplificat, omitem faptul ca e un graf, nu un arbore, si ca traversarea postordine se refera la arbori binari, iar noi putem avea mai mult de 2 dependinte per nod), alogoritmul ar presupune traversarea arborelui in postordine. Libraria 'digraph_utils', parte a librariei standard in erlang, cred ca implementeaza acest algoritm.
    
    Un eventual avantaj al acestui algoritm este acela ca incearca sa pastreze pe cat posibil ordinea initiala a taskurile (bineinteles depinde de implemetarea specifica).
 
