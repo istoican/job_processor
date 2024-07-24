@@ -1,42 +1,38 @@
-## Cateva cuvinte despre alogoritmul folosit.
+## A Few Words About the Algorithm Used
 
-Problema se poate aborda in 2 moduri.
+We observe that the problem can be illustrated using a graph where each node is connected to its direct dependencies. The problem can be approached in two ways:
 
-### Prima varianta de rezolvarea presupune:
+### 1. The First Solution Involves:
 
-     1. Parcurgerea listei de taskuri si mutarea intr-o noua lista (a taskurilor ordonate) 
-        a acelora care nu au dependinte. 
-     2. Daca toate taskurile au dependinte atunci inseamna ca taskurile nu por fi ordonate 
-        (avem de-a face ori cu dependinte ciclice or cu dependinte care nu se afla in lista 
-        de taskuri).
-     3. Se repeta pasul de mai sus pentru taskurile ramase in lista (vor fi mutate taskurile
-        ale caror dependinte au fost deja rezolvate anterior).
-     4. Algoritmul se repeta paca cand nu mai este nici un task de mutat.
+   * Iterating through the list of tasks and moving those without dependencies to a new list (the ordered tasks list).
+   * If all tasks have dependencies, it means the tasks cannot be ordered (we are either dealing with cyclic dependencies or dependencies that are not in the task list).
+   * Repeating the above steps for the remaining tasks in the list (only tasks whose dependencies have already been resolved will be moved).
+   * Continuing until there are no more tasks to move.
 
-   Pentru a vizualiza algoritmul, ne putem imagina taskurile (intr-un mod simplificat, pentru ca problema e cu graf, nu un arbore, si nici nu poate avea un singur nod radacina, dar arborii sunt mai usor de vizualizat) sub forma unui arbore in care nodurile copil sunt dependinte. Algorimtul ar presupune parcurgerea mai intai a tuturor nodurilor frunza, indreptandu-ne nivel cu nivel catre nodurile radacina. 
+   Analogous to traversing a tree, this algorithm is equivalent to first traversing all leaf nodes, then moving level by level towards the root nodes. 
 
-   Avantajul acestui algoritm este ca este usor de inteles (intr-un limbaj procedural nici nu este nevoie de recursivitate, un simplu loop e de ajuns) si de implementat.
+   The advantage of this algorithm is that it is easy to understand (in a procedural language, recursion is not even needed, a simple loop suffices) and easy to implement.
 
-### A doua varianta presupune:
+### 2. The Second Solution Involves:
 
-     1. Inceperem cu primul nod, si rezolvam in mod recursiv a dependintelor sale. 
-     2. Pasul se repeta pentru toate taskurile din lista. 
+   1. Starting with the first node and recursively resolving its dependencies.
+   2. Repeating the step for all tasks in the list. 
      
-   Din nou, imaginandu-ne taskurile sub forma unui arbore (intr-un mod simplificat, omitem faptul ca e un graf, nu un arbore, si ca traversarea postordine se refera la arbori binari, iar noi putem avea mai mult de 2 dependinte per nod), alogoritmul ar presupune traversarea arborelui in postordine. Libraria 'digraph_utils', parte a librariei standard in erlang, cred ca implementeaza acest algoritm.
+   Again, analogous to traversing a tree, this algorithm is equivalent to a post-order traversal. The 'digraph_utils' library, part of the standard library in Erlang, implement this algorithm.
    
-   Un eventual avantaj al acestui algoritm este acela ca incearca sa pastreze pe cat posibil ordinea initiala a taskurile (bineinteles depinde de implemetarea specifica).
+   A potential advantage of this algorithm is that it tries to preserve the initial order of tasks as much as possible (depending on the specific implementation).
 
-Dat fiind faptul ca problema nu cere pastrarea pe cat posibil a ordinii initiale a taskurilor, modului succint in care se poate implementa in erlang, si faptul ca varianta 2 e deja implemtata in libraria standard, **eu am ales sa implementez varianta 1**.
-
-
-## Fisiere de interes
-
-* src/job_processor.erl: Include implementarea propriu-zisa a algoritmului. 
-* src/job_processor_htp_handler.erl: Cuprinde handlerul care proceseaza requestul http. Atat pentru raspunsul de tip json, cat si pentru cel de tip script se foloseste acelasi endpoint [POST] "http://127.0.0.1:8080/", cu deosibirea ca daca se doreste un raspuns de tip script trebuie trimis un query-param "format=script" (http://127.0.0.1:8080/?format=script). 
-* test/job_processor_tests.erl: Teste eUnit pentru testarea implementarii.
+Given that the problem does not require preserving as much as possible the initial order of tasks, the succinct way it can be implemented in Erlang, and the fact that the second solution is already implemented in the standard library, **I have chosen to implement the first solution**.
 
 
-## Pornirea serverului http
+## Relevant Files
+
+* `src/job_processor.erl`: Includes the actual implementation of the algorithm. 
+* `src/job_processor_htp_handler.erl`: Contains the handler that processes the HTTP request. The same endpoint [POST] "http://127.0.0.1:8080/", is used for both JSON and script responses, with the difference that for a script response, a query parameter "format=script" must be sent (http://127.0.0.1:8080/?format=script). 
+* `test/job_processor_tests.erl`: eUnit test file used for testing the implementation.
+
+
+## Starting the HTTP Server
 
 ```shell
 rebar3 compile
@@ -44,20 +40,20 @@ rebar3 shell
 ```
 
 
-## Rularea testelor eUnit
+## Running eUnit Tests
 
 ```shell
 rebar3 eunit
 ```
 
 
-## Testarea endpoint-ului http atunci cand dorim un raspuns `json`
+## Testing the HTTP Endpoint - `json` response
 
 ```shell
 curl -d @test-data.json http://127.0.0.1:8080
 ```
 
-## Testarea endpoint-ului http atunci cand dorim un raspuns de tip `script`
+## Testing the HTTP Endpoint - `script` response
 
 ```shell
 curl -d @test-data.json http://127.0.0.1:8080?format=script
